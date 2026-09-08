@@ -1,0 +1,293 @@
+{
+  "id": "example-villa23",
+  "updated": 1788853447483,
+  "meta": {
+    "name": "Villa 23 Meadows 9 — Aluminium BOQ (example)",
+    "project": "Proposed modification works — Villa 23, Street 3, Meadows 9",
+    "client": "Private client",
+    "consultant": "Living Space Design Consultancy LLC",
+    "drawings": "GTS-A-09 / A-10 / A-11 / A-12, Rev. 00, 21 August 2026 (EMAAR stamped)",
+    "location": "Meadows 9, Dubai, UAE",
+    "preparedBy": "Eurolux",
+    "date": "2026-09-08",
+    "currency": "AED",
+    "scope": "Supply, fabrication, delivery and installation of new external aluminium doors and windows",
+    "finish": "Powder coated MATTE BLACK, to architect's approval",
+    "glazing": "To be confirmed"
+  },
+  "openings": [
+    {
+      "id": "ex00",
+      "kind": "sliding-door",
+      "systemId": "S600EDGE",
+      "w": 3400,
+      "h": 2150,
+      "qty": 1,
+      "panels": "3 panels (1 fixed + 2 sliding)",
+      "location": "Ground Floor — Living / Dining area, rear elevation",
+      "page": 3,
+      "notes": "",
+      "mark": "SD-01"
+    },
+    {
+      "id": "ex01",
+      "kind": "sliding-door",
+      "systemId": "S600EDGE",
+      "w": 2000,
+      "h": 2150,
+      "qty": 1,
+      "panels": "2 panels (2 sliding)",
+      "location": "Ground Floor — Lounge, rear elevation",
+      "page": 3,
+      "notes": "",
+      "mark": "SD-02"
+    },
+    {
+      "id": "ex02",
+      "kind": "sliding-door",
+      "systemId": "S600EDGE",
+      "w": 2000,
+      "h": 2150,
+      "qty": 1,
+      "panels": "2 panels (2 sliding)",
+      "location": "Ground Floor — Study Room, front elevation",
+      "page": 3,
+      "notes": "",
+      "mark": "SD-03"
+    },
+    {
+      "id": "ex03",
+      "kind": "sliding-door",
+      "systemId": "S600EDGE",
+      "w": 2000,
+      "h": 2150,
+      "qty": 1,
+      "panels": "2 panels (2 sliding)",
+      "location": "First Floor — Master Bedroom to balcony, front elevation",
+      "page": 3,
+      "notes": "",
+      "mark": "SD-04"
+    },
+    {
+      "id": "ex04",
+      "kind": "sliding-door",
+      "systemId": "S600EDGE",
+      "w": 1500,
+      "h": 2150,
+      "qty": 2,
+      "panels": "2 panels (2 sliding)",
+      "location": "First Floor — bedrooms onto rear balcony",
+      "page": 3,
+      "notes": "",
+      "mark": "SD-05"
+    },
+    {
+      "id": "ex05",
+      "kind": "sliding-window",
+      "systemId": "S600EDGE",
+      "w": 1500,
+      "h": 1050,
+      "qty": 1,
+      "panels": "2 panels (1 fixed + 1 sliding)",
+      "location": "Ground Floor — Kitchen / Bathroom 01, front elevation",
+      "page": 3,
+      "notes": "",
+      "mark": "SW-01"
+    },
+    {
+      "id": "ex06",
+      "kind": "sliding-window",
+      "systemId": "S600EDGE",
+      "w": 1500,
+      "h": 1050,
+      "qty": 1,
+      "panels": "2 panels (1 fixed + 1 sliding)",
+      "location": "Ground Floor — Utility area, right side elevation",
+      "page": 4,
+      "notes": "",
+      "mark": "SW-02"
+    },
+    {
+      "id": "ex07",
+      "kind": "fixed-window",
+      "systemId": "S67F",
+      "w": 2000,
+      "h": 1250,
+      "qty": 1,
+      "panels": "Single fixed light",
+      "location": "First Floor — Bedroom 02, front elevation",
+      "page": 3,
+      "notes": "",
+      "mark": "FW-01"
+    },
+    {
+      "id": "ex08",
+      "kind": "fixed-window",
+      "systemId": "S67F",
+      "w": 1500,
+      "h": 1250,
+      "qty": 1,
+      "panels": "Single fixed light",
+      "location": "First Floor — right side elevation",
+      "page": 4,
+      "notes": "",
+      "mark": "FW-02"
+    },
+    {
+      "id": "ex09",
+      "kind": "fixed-window",
+      "systemId": "S67F",
+      "w": 800,
+      "h": 1250,
+      "qty": 1,
+      "panels": "Single fixed light",
+      "location": "First Floor — left side elevation",
+      "page": 4,
+      "notes": "",
+      "mark": "FW-03"
+    },
+    {
+      "id": "ex10",
+      "kind": "fixed-window",
+      "systemId": "S67F",
+      "w": 1500,
+      "h": 1050,
+      "qty": 1,
+      "panels": "Single fixed light",
+      "location": "Ground Floor — right side elevation",
+      "page": 4,
+      "notes": "",
+      "mark": "FW-04"
+    },
+    {
+      "id": "ex11",
+      "kind": "fixed-window",
+      "systemId": "S67F",
+      "w": 1070,
+      "h": 1050,
+      "qty": 1,
+      "panels": "Single fixed light",
+      "location": "Ground Floor — right side elevation",
+      "page": 4,
+      "notes": "",
+      "mark": "FW-05"
+    },
+    {
+      "id": "ex12",
+      "kind": "fixed-window",
+      "systemId": "S67F",
+      "w": 600,
+      "h": 600,
+      "qty": 1,
+      "panels": "Single fixed light",
+      "location": "Ground Floor — Powder Room, front elevation",
+      "page": 3,
+      "notes": "",
+      "mark": "FW-06"
+    },
+    {
+      "id": "ex13",
+      "kind": "fixed-window",
+      "systemId": "S67F",
+      "w": 600,
+      "h": 600,
+      "qty": 2,
+      "panels": "Single fixed light",
+      "location": "First Floor — Bathrooms, rear elevation",
+      "page": 3,
+      "notes": "",
+      "mark": "FW-07"
+    },
+    {
+      "id": "ex14",
+      "kind": "fixed-window",
+      "systemId": "S67F",
+      "w": 600,
+      "h": 600,
+      "qty": 3,
+      "panels": "Single fixed light",
+      "location": "First Floor — right side elevation",
+      "page": 4,
+      "notes": "",
+      "mark": "FW-08"
+    },
+    {
+      "id": "ex15",
+      "kind": "hinged-door",
+      "systemId": "S67H",
+      "w": 900,
+      "h": 2150,
+      "qty": 1,
+      "panels": "Single leaf, outward opening",
+      "location": "Ground Floor — Utility Room external door, right side elevation",
+      "page": 4,
+      "notes": "",
+      "mark": "HD-01"
+    },
+    {
+      "id": "ex16",
+      "kind": "hinged-door",
+      "systemId": "S67H",
+      "w": 800,
+      "h": 2000,
+      "qty": 1,
+      "panels": "Single leaf, outward opening",
+      "location": "Ground Floor — Storage Room external door, left side elevation",
+      "page": 4,
+      "notes": "",
+      "mark": "HD-02"
+    }
+  ],
+  "rates": {
+    "S600EDGE": 1500,
+    "S650PHOS": 1850,
+    "S67H": 1100,
+    "S67F": 900,
+    "M35": 1250,
+    "M50": 1450
+  },
+  "minBillable": 1.5,
+  "ancillary": [
+    {
+      "code": "A-01",
+      "desc": "Careful removal and disposal off site of existing aluminium doors, windows and glazing, including making good to reveals ready to receive new works.",
+      "qty": 1,
+      "rate": 4500
+    },
+    {
+      "code": "A-02",
+      "desc": "Aluminium sub-frames / receptor frames, packers, fixing brackets and anchors to all openings.",
+      "qty": 1,
+      "rate": 3800
+    },
+    {
+      "code": "A-03",
+      "desc": "Weather sealing to perimeter of all openings — closed-cell backer rod and low-modulus neutral-cure structural silicone, internally and externally.",
+      "qty": 1,
+      "rate": 3200
+    },
+    {
+      "code": "A-04",
+      "desc": "Ironmongery allowance — multi-point locking to hinged leaves, cylinder locks and lever handles to sliding leaves, finish to match frames.",
+      "qty": 1,
+      "rate": 2800
+    },
+    {
+      "code": "A-05",
+      "desc": "Delivery to site, offloading, internal distribution, hoisting, access / scaffold and protection of finished works until handover.",
+      "qty": 1,
+      "rate": 5500
+    },
+    {
+      "code": "A-06",
+      "desc": "Shop drawings, authority submittal support, sample panel, site survey and final snagging.",
+      "qty": 1,
+      "rate": 3500
+    }
+  ],
+  "contingency": 0.05,
+  "vat": 0.05,
+  "mergeIdentical": true,
+  "excluded": "Main entrance door (1600 × 2450 mm, front elevation) — excluded at the client's instruction; to be supplied under the separate EMAAR-approved main door specification.",
+  "customNotes": "Sizes are structural opening dimensions read from the EMAAR-stamped elevations and cross-checked against the floor plans.\nAll dimensions to be verified on site before fabrication."
+}
