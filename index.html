@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ALUMIL BOQ Builder</title>
+<meta name="description" content="Build bills of quantities for ALUMIL aluminium doors, windows and curtain wall systems from your drawings.">
+<meta name="theme-color" content="#1f3864">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ALUMIL BOQ">
+<link rel="stylesheet" href="src/styles.css">
+<script src="vendor/pdf.min.js" defer></script>
+<script src="vendor/xlsx.full.min.js" defer></script>
+<script type="module" src="src/app.js"></script>
+</head>
+<body>
+
+<div class="app">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">BOQ</div>
+      <div>
+        <b>ALUMIL BOQ Builder</b>
+        <span>Middle East catalogue · doors, windows &amp; curtain wall</span>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <div class="projname">Current: <span id="projName">Untitled</span></div>
+    <span class="pill" id="netPill">Online</span>
+    <span class="pill" id="saveState">Saved</span>
+    <button class="btn sec" id="installBtn" style="display:none">Install app</button>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button data-tab="project"   aria-selected="true">1 · Project</button>
+    <button data-tab="drawings"  aria-selected="false">2 · Drawings</button>
+    <button data-tab="takeoff"   aria-selected="false">3 · Takeoff</button>
+    <button data-tab="rates"     aria-selected="false">4 · Rates &amp; notes</button>
+    <button data-tab="boq"       aria-selected="false">5 · Bill of quantities</button>
+  </nav>
+
+  <main>
+
+    <!-- ============ PROJECT ============ -->
+    <section class="panel active" id="tab-project">
+      <div class="card">
+        <h2>Project details</h2>
+        <div class="body">
+          <div class="grid g3" id="projFields"></div>
+          <div style="margin-top:12px">
+            <label class="f" for="m_scope">Scope of works</label>
+            <textarea id="m_scope"></textarea>
+          </div>
+          <div class="row end" style="margin-top:12px">
+            <button class="btn sec" id="importJSON">Import project file</button>
+            <button class="btn sec" id="exportJSON">Export project file</button>
+            <button class="btn" id="newProject">New BOQ</button>
+          </div>
+          <input type="file" id="jsonInput" accept=".json,application/json" hidden>
+          <p class="hint" style="margin-top:10px">Everything is stored in this browser on this device. Use <b>Export project file</b> to back a BOQ up or move it to another machine.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Saved bills</h2>
+        <div class="body"><div id="projList"></div></div>
+      </div>
+    </section>
+
+    <!-- ============ DRAWINGS ============ -->
+    <section class="panel" id="tab-drawings">
+      <div class="card">
+        <h2>Drawing</h2>
+        <div class="body">
+          <div class="dropzone" id="dropzone">
+            <b style="font-size:16px;color:var(--ink);display:block;margin-bottom:6px">Drop a drawing here, or click to choose</b>
+            PDF drawing sets, or a PNG / JPG of an elevation. Stored on this device only.
+          </div>
+          <input type="file" id="fileInput" accept="application/pdf,image/*" hidden>
+
+          <div id="viewerUI" style="display:none">
+            <div class="vbar">
+              <span style="font-weight:600" id="drawingName"></span>
+              <div class="grp"><select id="pageSel"></select></div>
+              <div class="grp">
+                <button class="tool" id="zoomOut" title="Zoom out">−</button>
+                <button class="tool" id="zoomFit">Fit</button>
+                <button class="tool" id="zoomIn" title="Zoom in">+</button>
+              </div>
+              <div class="grp">
+                <button class="tool" data-tool="pan">Pan</button>
+                <button class="tool" data-tool="calibrate">Set scale</button>
+                <button class="tool" data-tool="measure">Measure</button>
+                <button class="tool" id="clearCalib">Clear scale</button>
+              </div>
+              <span class="calib" id="calibBadge">Not calibrated</span>
+              <div class="spacer" style="flex:1"></div>
+              <button class="btn sec" id="changeDrawing">Change drawing</button>
+              <button class="btn" id="quickAdd">Add opening</button>
+            </div>
+            <div class="viewer">
+              <div class="stage" id="stage">
+                <canvas id="pageCanvas"></canvas>
+                <canvas id="overlay"></canvas>
+              </div>
+              <div>
+                <div class="card" style="margin:0">
+                  <h2>How to measure off the drawing</h2>
+                  <div class="body" style="font-size:13px;line-height:1.6">
+                    <p style="margin:0 0 10px"><b>1. Set the scale.</b> Click <b>Set scale</b>, then drag a line along any dimension you can read on the drawing — a 2000 mm opening width, say. Enter that real length in millimetres when prompted.</p>
+                    <p style="margin:0 0 10px"><b>2. Measure openings.</b> Click <b>Measure</b> and drag a box around an opening. Its width and height in millimetres are carried straight into the Add opening form.</p>
+                    <p style="margin:0 0 10px"><b>3. Check against the drawing.</b> Measured sizes are approximate. Always overtype them with the dimension printed on the drawing where one is shown.</p>
+                    <p style="margin:0"><b>Scale is per page</b> — recalibrate when you move to a different sheet or a different drawing scale.</p>
+                    <div class="note">Measured dimensions are a drafting aid, not a substitute for a site survey. Verify all dimensions on site before fabrication.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TAKEOFF ============ -->
+    <section class="panel" id="tab-takeoff">
+      <div class="card" id="openingForm" style="display:none">
+        <h2 id="formTitle">Add opening</h2>
+        <div class="body">
+          <div class="grid g4">
+            <div><label class="f" for="f_kind">Opening type</label><select id="f_kind"></select></div>
+            <div><label class="f" for="f_system">ALUMIL system</label><select id="f_system"></select></div>
+            <div><label class="f" for="f_w">Width (mm)</label><input type="number" id="f_w" min="1" step="1" inputmode="numeric"></div>
+            <div><label class="f" for="f_h">Height (mm)</label><input type="number" id="f_h" min="1" step="1" inputmode="numeric"></div>
+            <div><label class="f" for="f_panels">Configuration</label><select id="f_panels"></select></div>
+            <div><label class="f" for="f_qty">Quantity</label><input type="number" id="f_qty" min="1" step="1" value="1" inputmode="numeric"></div>
+            <div><label class="f" for="f_loc">Location</label><input type="text" id="f_loc" placeholder="e.g. GF Living area, rear elevation"></div>
+            <div><label class="f" for="f_page">Drawing page</label><input type="number" id="f_page" min="1" step="1"></div>
+          </div>
+          <div style="margin-top:12px"><label class="f" for="f_notes">Notes (optional)</label><input type="text" id="f_notes" placeholder="e.g. confirm sash weight against system limit"></div>
+          <div id="sysInfo"></div>
+          <div class="row end" style="margin-top:14px">
+            <button class="btn sec" id="cancelOpening">Cancel</button>
+            <button class="btn sec" id="saveAddAnother">Save &amp; add another</button>
+            <button class="btn" id="saveOpening">Add opening</button>
+          </div>
+          <p class="hint">Tip: press <b>Enter</b> in any field to save and start the next opening, <b>Esc</b> to close.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Opening schedule</h2>
+        <div class="body">
+          <div class="row" style="margin-bottom:12px">
+            <button class="btn" id="addOpening">+ Add opening</button>
+            <button class="btn dang" id="clearAll">Clear schedule</button>
+            <div class="spacer" style="flex:1"></div>
+            <div id="toSummary" class="hint" style="font-size:13px"></div>
+          </div>
+          <div class="empty" id="toEmpty">
+            <b>No openings scheduled yet</b>
+            Add them by hand, or measure them off the drawing on the Drawings tab.
+          </div>
+          <div class="tblwrap" id="toTable" style="display:none">
+            <table>
+              <thead><tr>
+                <th style="width:70px">Mark</th><th style="width:120px">Type</th><th>System</th>
+                <th class="num" style="width:70px">W (mm)</th><th class="num" style="width:70px">H (mm)</th>
+                <th style="width:210px">Configuration</th><th class="num" style="width:50px">Qty</th>
+                <th class="num" style="width:80px">Area m²</th><th>Location</th>
+                <th class="ctr" style="width:100px">Actions</th>
+              </tr></thead>
+              <tbody id="toBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RATES ============ -->
+    <section class="panel" id="tab-rates">
+      <div class="card">
+        <h2>System rates</h2>
+        <div class="body">
+          <p class="hint" style="margin-bottom:10px">Rates are per m² of billable area and cover supply, fabrication, finish, hardware, glazing allowance and installation. Replace them with tendered figures before issuing.</p>
+          <div class="tblwrap" style="max-height:none">
+            <table>
+              <thead><tr><th>ALUMIL system</th><th class="ctr" style="width:280px">Applies to</th><th class="num" style="width:150px">Rate per m²</th></tr></thead>
+              <tbody id="ratesBody"></tbody>
+            </table>
+          </div>
+          <div class="row end" style="margin-top:10px"><button class="btn sec" id="resetRates">Reset to defaults</button></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Measurement &amp; commercial settings</h2>
+        <div class="body">
+          <div class="grid g4">
+            <div>
+              <label class="f" for="minBill">Minimum billable area (m²/unit)</label>
+              <input type="number" id="minBill" min="0" step="0.05">
+              <p class="hint">Units smaller than this are billed at the minimum. UAE trade norm is 1.50 m².</p>
+            </div>
+            <div>
+              <label class="f" for="contPct">Contingency (%)</label>
+              <input type="number" id="contPct" min="0" step="0.5">
+            </div>
+            <div>
+              <label class="f" for="vatPct">VAT (%)</label>
+              <input type="number" id="vatPct" min="0" step="0.5">
+            </div>
+            <div>
+              <label class="f">Merge identical items</label>
+              <label style="display:flex;gap:8px;align-items:center;padding-top:8px;font-size:13px">
+                <input type="checkbox" id="mergeToggle" style="width:auto"> Combine same type, system and size into one line
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Ancillary &amp; installation works</h2>
+        <div class="body">
+          <div class="tblwrap" style="max-height:none">
+            <table>
+              <thead><tr><th style="width:80px">Code</th><th>Description</th><th class="num" style="width:80px">Qty</th><th class="num" style="width:120px">Rate</th><th class="num" style="width:110px">Amount</th><th style="width:50px"></th></tr></thead>
+              <tbody id="ancBody"></tbody>
+            </table>
+          </div>
+          <div class="row end" style="margin-top:10px">
+            <button class="btn sec" id="resetAnc">Reset list</button>
+            <button class="btn sec" id="addAnc">+ Add item</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Exclusions &amp; notes</h2>
+        <div class="body">
+          <div class="grid g2">
+            <div>
+              <label class="f" for="excludedTxt">Project-specific exclusions</label>
+              <textarea id="excludedTxt" placeholder="e.g. Main entrance door (1600 × 2450 mm) excluded at the client's instruction."></textarea>
+              <p class="hint">Printed as a red callout under the bill.</p>
+            </div>
+            <div>
+              <label class="f" for="customNotes">Additional notes (one per line)</label>
+              <textarea id="customNotes" placeholder="Anything else the recipient needs to know."></textarea>
+              <p class="hint">Standard basis-of-measurement, glazing, exclusion and commercial notes are added automatically.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BOQ ============ -->
+    <section class="panel" id="tab-boq">
+      <div class="card">
+        <h2>Bill of quantities</h2>
+        <div class="body">
+          <div class="row" style="margin-bottom:12px">
+            <button class="btn" id="btnXlsx">Export Excel (.xlsx)</button>
+            <button class="btn" id="btnPdf">Export PDF</button>
+            <button class="btn sec" id="btnRefresh">Refresh</button>
+            <div class="spacer" style="flex:1"></div>
+            <span class="hint">PDF export opens your browser's print dialog — choose <b>Save as PDF</b>.</span>
+          </div>
+          <div id="boqOut"></div>
+          <div id="boqTotals" style="display:flex;margin-top:14px"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div id="printRoot"></div>
+<div class="toast" id="toast"></div>
+
+</body>
+</html>
